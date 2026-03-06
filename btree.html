@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<title>B+ Tree Visualization</title>
+<style>
+  *        { box-sizing:border-box; margin:0; padding:0; }
+  body     { font-family:Arial,sans-serif; background:#f0f4f8; padding:20px; }
+  h1       { text-align:center; color:#2c3e50; margin:20px 0 10px; }
+  h2       { color:#34495e; margin:20px 0 10px; }
+  .badges  { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin:10px 0 30px; }
+  .badge   { background:#3498db; color:#fff; padding:8px 20px; border-radius:20px; font-size:14px; }
+  .section { background:#fff; border-radius:12px; padding:20px;
+             box-shadow:0 2px 10px rgba(0,0,0,.08); margin:20px 0; overflow-x:auto; }
+  /* tree levels */
+  .lv-label{ text-align:center; font-size:12px; color:#888; margin:15px 0 5px; }
+  .level   { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin:5px 0; }
+  .nd-int  { background:#cce5ff; border:2px solid #004085; border-radius:8px;
+             padding:8px 12px; font-size:11px; text-align:center; min-width:80px; }
+  .nd-leaf { background:#d4edda; border:2px solid #28a745; border-radius:8px;
+             padding:8px 12px; font-size:11px; text-align:center; min-width:80px; }
+  .key     { display:block; font-weight:bold; color:#2c3e50; padding:1px 0; }
+  /* leaf chain */
+  .chain   { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
+  .ch-node { background:#d4edda; border:2px solid #28a745; border-radius:8px;
+             padding:8px; font-size:11px; min-width:100px; text-align:center; }
+  .arrow   { font-size:20px; color:#28a745; font-weight:bold; }
+  /* file table */
+  table    { width:100%; border-collapse:collapse; }
+  th       { background:#3498db; color:#fff; padding:10px; text-align:left; }
+  td       { padding:8px 10px; border-bottom:1px solid #eee; font-size:13px; }
+  tr:hover { background:#f8f9fa; }
+  .ext     { background:#e9ecef; border-radius:4px; padding:2px 7px; font-size:11px; }
+  footer   { text-align:center; color:#aaa; margin:30px 0; font-size:12px; }
+  .legend  { display:flex; gap:20px; margin:10px 0; font-size:13px; }
+  .leg-int { width:16px;height:16px;background:#cce5ff;border:2px solid #004085;display:inline-block;vertical-align:middle; }
+  .leg-lf  { width:16px;height:16px;background:#d4edda;border:2px solid #28a745;display:inline-block;vertical-align:middle; }
+</style>
+</head>
+<body>
+<h1>B+ Tree File Index Visualization</h1>
+<div class='badges'>
+  <span class='badge'>Total Files : 125</span>
+  <span class='badge'>Total Size  : 1.7 MB</span>
+  <span class='badge'>Tree Height : 4</span>
+  <span class='badge'>Degree (t)  : 3</span>
+  <span class='badge'>Max Keys    : 5</span>
+</div>
+<div class='section'>
+<h2>Tree Structure</h2>
+<div class='legend'><span><span class='leg-int'></span> Internal node</span><span><span class='leg-lf'></span> Leaf node</span></div>
+<div class='lv-label'>Level 0 &mdash; Root</div>
+<div class='level'>
+  <div class='nd-int'>
+    <span class='key'>btree.h</span>
+    <span class='key'>main.c</span>
+  </div>
+</div>
+<div class='lv-label'>Level 1 &mdash; Internal</div>
+<div class='level'>
+  <div class='nd-int'>
+    <span class='key'>33d35e00f96c0c40f2e24ddbc0fce1395bf6aa</span>
+    <span class='key'>README.md</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>data.json</span>
+    <span class='key'>e64585615e5adc29662d5bfc4bce836f45260d</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>pre-commit.sample</span>
+    <span class='key'>search.c</span>
+  </div>
+</div>
+<div class='lv-label'>Level 2 &mdash; Internal</div>
+<div class='level'>
+  <div class='nd-int'>
+    <span class='key'>141e0b4d12f122f38077c25391f1dbba702e71</span>
+    <span class='key'>2144e399e38bd4a77bb69c704e766266cc62c3</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>480f2863928910f12fd4030b99b61c899665e4</span>
+    <span class='key'>6b041cce250c6671edecdb1a0d89b66691252e</span>
+    <span class='key'>88d6c536fb2cc234879e72b60edbbf60fd3e60</span>
+    <span class='key'>COMMIT_EDITMSG</span>
+    <span class='key'>Makefile</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>b57a42a6b70d835014ce4254aa0522d2c4f232</span>
+    <span class='key'>banner.png</span>
+    <span class='key'>btree.c</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>ca17452fdb3292706167c69774b2d664ef27f1</span>
+    <span class='key'>config.ini</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>delete.c</span>
+    <span class='key'>deploy.py</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>f253814d6ca31988320c4ce1aea9ecb6c19398</span>
+    <span class='key'>fm.exe</span>
+    <span class='key'>index</span>
+    <span class='key'>main</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>main.h</span>
+    <span class='key'>notes.txt</span>
+    <span class='key'>photo.jpg</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>pre-rebase.sample</span>
+    <span class='key'>report.pdf</span>
+    <span class='key'>sales.csv</span>
+  </div>
+  <div class='nd-int'>
+    <span class='key'>sendemail-validate.sample</span>
+    <span class='key'>structs.h</span>
+    <span class='key'>users.csv</span>
+    <span class='key'>utils.c</span>
+  </div>
+</div>
+<div class='lv-label'>Level 3 &mdash; Leaf Level</div>
+<div class='level'>
+  <div class='nd-leaf'>
+    <span class='key'>0344438ce20ff3c5fc0252396c01513e19f713</span>
+    <span class='key'>03b58b724870de4d7b90c363b98c2345fd6834</span>
+    <span class='key'>06f7f0f1044089d43a59c3367e3842d89b81f3</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>141e0b4d12f122f38077c25391f1dbba702e71</span>
+    <span class='key'>1a053a8428b4acdb05933422fd473cd3ee80b2</span>
+    <span class='key'>20d8903a774b7038af849cf0495d31a32ad380</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>2144e399e38bd4a77bb69c704e766266cc62c3</span>
+    <span class='key'>224d059b83ecbcae7572cf6519d8bbcde5a210</span>
+    <span class='key'>227cf51f7a18ec6badb29e4cd5ac1281fda47b</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>33d35e00f96c0c40f2e24ddbc0fce1395bf6aa</span>
+    <span class='key'>40d723393f07fb10c03722515150a466841e60</span>
+    <span class='key'>43ff7cc40526efc0fc317f30396d9b5d723da6</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>480f2863928910f12fd4030b99b61c899665e4</span>
+    <span class='key'>577972229a720caec5fc80ca23985d37d7e464</span>
+    <span class='key'>60d2f2747dba5719db042f1ae126ca77917c63</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>6b041cce250c6671edecdb1a0d89b66691252e</span>
+    <span class='key'>7100bf1620d2284f2f9bc25b0f0fe7510aeed3</span>
+    <span class='key'>76909778bac19dbfbdf660fef3205b9cd55123</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>88d6c536fb2cc234879e72b60edbbf60fd3e60</span>
+    <span class='key'>8eeebea3c1fcfd6e4f7bb1beac4beb111958b3</span>
+    <span class='key'>9e8d4f00ceb992c34a62eb16f37ba9f8a3f0eb</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>COMMIT_EDITMSG</span>
+    <span class='key'>HEAD</span>
+    <span class='key'>HEAD</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>Makefile</span>
+    <span class='key'>Makefile</span>
+    <span class='key'>Makefile</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>README.md</span>
+    <span class='key'>README.md</span>
+    <span class='key'>README.md</span>
+    <span class='key'>applypatch-msg.sample</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>b57a42a6b70d835014ce4254aa0522d2c4f232</span>
+    <span class='key'>backup.zip</span>
+    <span class='key'>backup.zip</span>
+    <span class='key'>backup.zip</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>banner.png</span>
+    <span class='key'>banner.png</span>
+    <span class='key'>banner.png</span>
+    <span class='key'>bf8553465a8503a329fcb08b3d22a5694006ec</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>btree.c</span>
+    <span class='key'>btree.c</span>
+    <span class='key'>btree.c</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>btree.h</span>
+    <span class='key'>btree.h</span>
+    <span class='key'>btree.h</span>
+    <span class='key'>c83706c47323db2e14927a858887d3f2363a69</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>ca17452fdb3292706167c69774b2d664ef27f1</span>
+    <span class='key'>commit-msg.sample</span>
+    <span class='key'>config</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>config.ini</span>
+    <span class='key'>config.ini</span>
+    <span class='key'>config.ini</span>
+    <span class='key'>d98c2a2f690a5a334cd84af0735de1238717c6</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>data.json</span>
+    <span class='key'>data.json</span>
+    <span class='key'>data.json</span>
+    <span class='key'>ddcc4c8ea706891cc697e8475dd9f2390ca037</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>delete.c</span>
+    <span class='key'>delete.c</span>
+    <span class='key'>delete.c</span>
+    <span class='key'>delete.c</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>deploy.py</span>
+    <span class='key'>deploy.py</span>
+    <span class='key'>deploy.py</span>
+    <span class='key'>description</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>e64585615e5adc29662d5bfc4bce836f45260d</span>
+    <span class='key'>eabe6461231a2a731e3daf40f96d22e907e335</span>
+    <span class='key'>exclude</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>f253814d6ca31988320c4ce1aea9ecb6c19398</span>
+    <span class='key'>fd828029fb3bb619173fdc20ca75d83e05b56a</span>
+    <span class='key'>file_btree_simple.c</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>fm.exe</span>
+    <span class='key'>fsmonitor-watchman.sample</span>
+    <span class='key'>homework.pdf</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>index</span>
+    <span class='key'>insert.c</span>
+    <span class='key'>main</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>main</span>
+    <span class='key'>main</span>
+    <span class='key'>main</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>main.c</span>
+    <span class='key'>main.c</span>
+    <span class='key'>main.c</span>
+    <span class='key'>main.c</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>main.h</span>
+    <span class='key'>main.h</span>
+    <span class='key'>main.h</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>notes.txt</span>
+    <span class='key'>notes.txt</span>
+    <span class='key'>operations.c</span>
+    <span class='key'>photo.jpg</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>photo.jpg</span>
+    <span class='key'>photo.jpg</span>
+    <span class='key'>post-update.sample</span>
+    <span class='key'>pre-applypatch.sample</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>pre-commit.sample</span>
+    <span class='key'>pre-merge-commit.sample</span>
+    <span class='key'>pre-push.sample</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>pre-rebase.sample</span>
+    <span class='key'>pre-receive.sample</span>
+    <span class='key'>prepare-commit-msg.sample</span>
+    <span class='key'>push-to-checkout.sample</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>report.pdf</span>
+    <span class='key'>report.pdf</span>
+    <span class='key'>report.pdf</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>sales.csv</span>
+    <span class='key'>sales.csv</span>
+    <span class='key'>sales.csv</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>search.c</span>
+    <span class='key'>search.c</span>
+    <span class='key'>search.c</span>
+    <span class='key'>search.c</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>sendemail-validate.sample</span>
+    <span class='key'>server.log</span>
+    <span class='key'>server.log</span>
+    <span class='key'>server.log</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>structs.h</span>
+    <span class='key'>update.sample</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>users.csv</span>
+    <span class='key'>users.csv</span>
+    <span class='key'>users.csv</span>
+    <span class='key'>utils.c</span>
+  </div>
+  <div class='nd-leaf'>
+    <span class='key'>utils.c</span>
+    <span class='key'>utils.c</span>
+    <span class='key'>visual.c</span>
+  </div>
+</div>
+</div>
+<div class='section'>
+<h2>Leaf Chain (All Files in Sorted Order)</h2>
+<div class='chain'>
+<div class='ch-node'>
+  <span class='key'>0344438ce20ff3c5fc0252396c01513e19f713</span>
+  <span class='key'>03b58b724870de4d7b90c363b98c2345fd6834</span>
+  <span class='key'>06f7f0f1044089d43a59c3367e3842d89b81f3</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>141e0b4d12f122f38077c25391f1dbba702e71</span>
+  <span class='key'>1a053a8428b4acdb05933422fd473cd3ee80b2</span>
+  <span class='key'>20d8903a774b7038af849cf0495d31a32ad380</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>2144e399e38bd4a77bb69c704e766266cc62c3</span>
+  <span class='key'>224d059b83ecbcae7572cf6519d8bbcde5a210</span>
+  <span class='key'>227cf51f7a18ec6badb29e4cd5ac1281fda47b</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>33d35e00f96c0c40f2e24ddbc0fce1395bf6aa</span>
+  <span class='key'>40d723393f07fb10c03722515150a466841e60</span>
+  <span class='key'>43ff7cc40526efc0fc317f30396d9b5d723da6</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>480f2863928910f12fd4030b99b61c899665e4</span>
+  <span class='key'>577972229a720caec5fc80ca23985d37d7e464</span>
+  <span class='key'>60d2f2747dba5719db042f1ae126ca77917c63</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>6b041cce250c6671edecdb1a0d89b66691252e</span>
+  <span class='key'>7100bf1620d2284f2f9bc25b0f0fe7510aeed3</span>
+  <span class='key'>76909778bac19dbfbdf660fef3205b9cd55123</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>88d6c536fb2cc234879e72b60edbbf60fd3e60</span>
+  <span class='key'>8eeebea3c1fcfd6e4f7bb1beac4beb111958b3</span>
+  <span class='key'>9e8d4f00ceb992c34a62eb16f37ba9f8a3f0eb</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>COMMIT_EDITMSG</span>
+  <span class='key'>HEAD</span>
+  <span class='key'>HEAD</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>Makefile</span>
+  <span class='key'>Makefile</span>
+  <span class='key'>Makefile</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>README.md</span>
+  <span class='key'>README.md</span>
+  <span class='key'>README.md</span>
+  <span class='key'>applypatch-msg.sample</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>b57a42a6b70d835014ce4254aa0522d2c4f232</span>
+  <span class='key'>backup.zip</span>
+  <span class='key'>backup.zip</span>
+  <span class='key'>backup.zip</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>banner.png</span>
+  <span class='key'>banner.png</span>
+  <span class='key'>banner.png</span>
+  <span class='key'>bf8553465a8503a329fcb08b3d22a5694006ec</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>btree.c</span>
+  <span class='key'>btree.c</span>
+  <span class='key'>btree.c</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>btree.h</span>
+  <span class='key'>btree.h</span>
+  <span class='key'>btree.h</span>
+  <span class='key'>c83706c47323db2e14927a858887d3f2363a69</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>ca17452fdb3292706167c69774b2d664ef27f1</span>
+  <span class='key'>commit-msg.sample</span>
+  <span class='key'>config</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>config.ini</span>
+  <span class='key'>config.ini</span>
+  <span class='key'>config.ini</span>
+  <span class='key'>d98c2a2f690a5a334cd84af0735de1238717c6</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>data.json</span>
+  <span class='key'>data.json</span>
+  <span class='key'>data.json</span>
+  <span class='key'>ddcc4c8ea706891cc697e8475dd9f2390ca037</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>delete.c</span>
+  <span class='key'>delete.c</span>
+  <span class='key'>delete.c</span>
+  <span class='key'>delete.c</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>deploy.py</span>
+  <span class='key'>deploy.py</span>
+  <span class='key'>deploy.py</span>
+  <span class='key'>description</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>e64585615e5adc29662d5bfc4bce836f45260d</span>
+  <span class='key'>eabe6461231a2a731e3daf40f96d22e907e335</span>
+  <span class='key'>exclude</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>f253814d6ca31988320c4ce1aea9ecb6c19398</span>
+  <span class='key'>fd828029fb3bb619173fdc20ca75d83e05b56a</span>
+  <span class='key'>file_btree_simple.c</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>fm.exe</span>
+  <span class='key'>fsmonitor-watchman.sample</span>
+  <span class='key'>homework.pdf</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>index</span>
+  <span class='key'>insert.c</span>
+  <span class='key'>main</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>main</span>
+  <span class='key'>main</span>
+  <span class='key'>main</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>main.c</span>
+  <span class='key'>main.c</span>
+  <span class='key'>main.c</span>
+  <span class='key'>main.c</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>main.h</span>
+  <span class='key'>main.h</span>
+  <span class='key'>main.h</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>notes.txt</span>
+  <span class='key'>notes.txt</span>
+  <span class='key'>operations.c</span>
+  <span class='key'>photo.jpg</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>photo.jpg</span>
+  <span class='key'>photo.jpg</span>
+  <span class='key'>post-update.sample</span>
+  <span class='key'>pre-applypatch.sample</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>pre-commit.sample</span>
+  <span class='key'>pre-merge-commit.sample</span>
+  <span class='key'>pre-push.sample</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>pre-rebase.sample</span>
+  <span class='key'>pre-receive.sample</span>
+  <span class='key'>prepare-commit-msg.sample</span>
+  <span class='key'>push-to-checkout.sample</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>report.pdf</span>
+  <span class='key'>report.pdf</span>
+  <span class='key'>report.pdf</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>sales.csv</span>
+  <span class='key'>sales.csv</span>
+  <span class='key'>sales.csv</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>search.c</span>
+  <span class='key'>search.c</span>
+  <span class='key'>search.c</span>
+  <span class='key'>search.c</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>sendemail-validate.sample</span>
+  <span class='key'>server.log</span>
+  <span class='key'>server.log</span>
+  <span class='key'>server.log</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>structs.h</span>
+  <span class='key'>update.sample</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>users.csv</span>
+  <span class='key'>users.csv</span>
+  <span class='key'>users.csv</span>
+  <span class='key'>utils.c</span>
+</div>
+<span class='arrow'>&#8594;</span>
+<div class='ch-node'>
+  <span class='key'>utils.c</span>
+  <span class='key'>utils.c</span>
+  <span class='key'>visual.c</span>
+</div>
+</div>
+</div>
+<div class='section'>
+<h2>All Indexed Files</h2>
+<table>
+<tr><th>#</th><th>Filename</th><th>Ext</th><th>Size</th><th>Path</th><th>Modified</th></tr>
+<tr><td>1</td><td><b>0344438ce20ff3c5fc0252396c01513e19f713</b></td><td><span class='ext'>-</span></td><td>2.2 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\18\0344438ce20ff3c5fc0252396c01513e19f713</td><td>2026-03-06</td></tr>
+<tr><td>2</td><td><b>03b58b724870de4d7b90c363b98c2345fd6834</b></td><td><span class='ext'>-</span></td><td>50.1 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\4f\03b58b724870de4d7b90c363b98c2345fd6834</td><td>2026-03-02</td></tr>
+<tr><td>3</td><td><b>06f7f0f1044089d43a59c3367e3842d89b81f3</b></td><td><span class='ext'>-</span></td><td>49.5 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\0d\06f7f0f1044089d43a59c3367e3842d89b81f3</td><td>2026-03-06</td></tr>
+<tr><td>4</td><td><b>141e0b4d12f122f38077c25391f1dbba702e71</b></td><td><span class='ext'>-</span></td><td>124 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\f2\141e0b4d12f122f38077c25391f1dbba702e71</td><td>2026-03-06</td></tr>
+<tr><td>5</td><td><b>1a053a8428b4acdb05933422fd473cd3ee80b2</b></td><td><span class='ext'>-</span></td><td>2.9 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\f8\1a053a8428b4acdb05933422fd473cd3ee80b2</td><td>2026-03-06</td></tr>
+<tr><td>6</td><td><b>20d8903a774b7038af849cf0495d31a32ad380</b></td><td><span class='ext'>-</span></td><td>156 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\dc\20d8903a774b7038af849cf0495d31a32ad380</td><td>2026-03-05</td></tr>
+<tr><td>7</td><td><b>2144e399e38bd4a77bb69c704e766266cc62c3</b></td><td><span class='ext'>-</span></td><td>1.9 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\58\2144e399e38bd4a77bb69c704e766266cc62c3</td><td>2026-03-06</td></tr>
+<tr><td>8</td><td><b>224d059b83ecbcae7572cf6519d8bbcde5a210</b></td><td><span class='ext'>-</span></td><td>2.3 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\14\224d059b83ecbcae7572cf6519d8bbcde5a210</td><td>2026-03-06</td></tr>
+<tr><td>9</td><td><b>227cf51f7a18ec6badb29e4cd5ac1281fda47b</b></td><td><span class='ext'>-</span></td><td>55 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\be\227cf51f7a18ec6badb29e4cd5ac1281fda47b</td><td>2026-03-02</td></tr>
+<tr><td>10</td><td><b>33d35e00f96c0c40f2e24ddbc0fce1395bf6aa</b></td><td><span class='ext'>-</span></td><td>276 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\16\33d35e00f96c0c40f2e24ddbc0fce1395bf6aa</td><td>2026-03-05</td></tr>
+<tr><td>11</td><td><b>40d723393f07fb10c03722515150a466841e60</b></td><td><span class='ext'>-</span></td><td>57 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\ac\40d723393f07fb10c03722515150a466841e60</td><td>2026-03-02</td></tr>
+<tr><td>12</td><td><b>43ff7cc40526efc0fc317f30396d9b5d723da6</b></td><td><span class='ext'>-</span></td><td>246 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\70\43ff7cc40526efc0fc317f30396d9b5d723da6</td><td>2026-03-02</td></tr>
+<tr><td>13</td><td><b>480f2863928910f12fd4030b99b61c899665e4</b></td><td><span class='ext'>-</span></td><td>207 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\18\480f2863928910f12fd4030b99b61c899665e4</td><td>2026-03-02</td></tr>
+<tr><td>14</td><td><b>577972229a720caec5fc80ca23985d37d7e464</b></td><td><span class='ext'>-</span></td><td>3.0 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\e4\577972229a720caec5fc80ca23985d37d7e464</td><td>2026-03-06</td></tr>
+<tr><td>15</td><td><b>60d2f2747dba5719db042f1ae126ca77917c63</b></td><td><span class='ext'>-</span></td><td>1.2 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\50\60d2f2747dba5719db042f1ae126ca77917c63</td><td>2026-03-06</td></tr>
+<tr><td>16</td><td><b>6b041cce250c6671edecdb1a0d89b66691252e</b></td><td><span class='ext'>-</span></td><td>159 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\f1\6b041cce250c6671edecdb1a0d89b66691252e</td><td>2026-03-02</td></tr>
+<tr><td>17</td><td><b>7100bf1620d2284f2f9bc25b0f0fe7510aeed3</b></td><td><span class='ext'>-</span></td><td>50.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\71\7100bf1620d2284f2f9bc25b0f0fe7510aeed3</td><td>2026-03-06</td></tr>
+<tr><td>18</td><td><b>76909778bac19dbfbdf660fef3205b9cd55123</b></td><td><span class='ext'>-</span></td><td>601 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\19\76909778bac19dbfbdf660fef3205b9cd55123</td><td>2026-03-06</td></tr>
+<tr><td>19</td><td><b>88d6c536fb2cc234879e72b60edbbf60fd3e60</b></td><td><span class='ext'>-</span></td><td>8.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\59\88d6c536fb2cc234879e72b60edbbf60fd3e60</td><td>2026-03-06</td></tr>
+<tr><td>20</td><td><b>8eeebea3c1fcfd6e4f7bb1beac4beb111958b3</b></td><td><span class='ext'>-</span></td><td>4.9 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\0b\8eeebea3c1fcfd6e4f7bb1beac4beb111958b3</td><td>2026-03-06</td></tr>
+<tr><td>21</td><td><b>9e8d4f00ceb992c34a62eb16f37ba9f8a3f0eb</b></td><td><span class='ext'>-</span></td><td>1.4 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\41\9e8d4f00ceb992c34a62eb16f37ba9f8a3f0eb</td><td>2026-03-06</td></tr>
+<tr><td>22</td><td><b>COMMIT_EDITMSG</b></td><td><span class='ext'>-</span></td><td>17 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\COMMIT_EDITMSG</td><td>2026-03-06</td></tr>
+<tr><td>23</td><td><b>HEAD</b></td><td><span class='ext'>-</span></td><td>21 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\HEAD</td><td>2026-03-02</td></tr>
+<tr><td>24</td><td><b>HEAD</b></td><td><span class='ext'>-</span></td><td>1.3 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\logs\HEAD</td><td>2026-03-06</td></tr>
+<tr><td>25</td><td><b>Makefile</b></td><td><span class='ext'>-</span></td><td>31.9 KB</td><td style='color:#888;font-size:11px'>//Makefile</td><td>2026-03-06</td></tr>
+<tr><td>26</td><td><b>Makefile</b></td><td><span class='ext'>-</span></td><td>9.6 KB</td><td style='color:#888;font-size:11px'>//Makefile</td><td>2026-03-06</td></tr>
+<tr><td>27</td><td><b>Makefile</b></td><td><span class='ext'>-</span></td><td>11.8 KB</td><td style='color:#888;font-size:11px'>//Makefile</td><td>2026-03-06</td></tr>
+<tr><td>28</td><td><b>README.md</b></td><td><span class='ext'>md</span></td><td>606 B</td><td style='color:#888;font-size:11px'>//README.md</td><td>2026-03-06</td></tr>
+<tr><td>29</td><td><b>README.md</b></td><td><span class='ext'>md</span></td><td>10.2 KB</td><td style='color:#888;font-size:11px'>//README.md</td><td>2026-03-06</td></tr>
+<tr><td>30</td><td><b>README.md</b></td><td><span class='ext'>md</span></td><td>14.8 KB</td><td style='color:#888;font-size:11px'>//README.md</td><td>2026-03-06</td></tr>
+<tr><td>31</td><td><b>applypatch-msg.sample</b></td><td><span class='ext'>sample</span></td><td>478 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\applypatch-msg.sample</td><td>2026-03-02</td></tr>
+<tr><td>32</td><td><b>b57a42a6b70d835014ce4254aa0522d2c4f232</b></td><td><span class='ext'>-</span></td><td>44.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\82\b57a42a6b70d835014ce4254aa0522d2c4f232</td><td>2026-03-06</td></tr>
+<tr><td>33</td><td><b>backup.zip</b></td><td><span class='ext'>zip</span></td><td>1.2 KB</td><td style='color:#888;font-size:11px'>/backup/backup.zip</td><td>2026-03-06</td></tr>
+<tr><td>34</td><td><b>backup.zip</b></td><td><span class='ext'>zip</span></td><td>2.0 KB</td><td style='color:#888;font-size:11px'>/backup/backup.zip</td><td>2026-03-06</td></tr>
+<tr><td>35</td><td><b>backup.zip</b></td><td><span class='ext'>zip</span></td><td>24.4 KB</td><td style='color:#888;font-size:11px'>/backup/backup.zip</td><td>2026-03-06</td></tr>
+<tr><td>36</td><td><b>banner.png</b></td><td><span class='ext'>png</span></td><td>12.6 KB</td><td style='color:#888;font-size:11px'>/media/banner.png</td><td>2026-03-06</td></tr>
+<tr><td>37</td><td><b>banner.png</b></td><td><span class='ext'>png</span></td><td>31.4 KB</td><td style='color:#888;font-size:11px'>/media/banner.png</td><td>2026-03-06</td></tr>
+<tr><td>38</td><td><b>banner.png</b></td><td><span class='ext'>png</span></td><td>8.0 KB</td><td style='color:#888;font-size:11px'>/media/banner.png</td><td>2026-03-06</td></tr>
+<tr><td>39</td><td><b>bf8553465a8503a329fcb08b3d22a5694006ec</b></td><td><span class='ext'>-</span></td><td>49.9 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\f0\bf8553465a8503a329fcb08b3d22a5694006ec</td><td>2026-03-06</td></tr>
+<tr><td>40</td><td><b>btree.c</b></td><td><span class='ext'>c</span></td><td>26.7 KB</td><td style='color:#888;font-size:11px'>/src/btree.c</td><td>2026-03-06</td></tr>
+<tr><td>41</td><td><b>btree.c</b></td><td><span class='ext'>c</span></td><td>18.2 KB</td><td style='color:#888;font-size:11px'>/src/btree.c</td><td>2026-03-06</td></tr>
+<tr><td>42</td><td><b>btree.c</b></td><td><span class='ext'>c</span></td><td>1.8 KB</td><td style='color:#888;font-size:11px'>/src/btree.c</td><td>2026-03-06</td></tr>
+<tr><td>43</td><td><b>btree.h</b></td><td><span class='ext'>h</span></td><td>18.3 KB</td><td style='color:#888;font-size:11px'>/include/btree.h</td><td>2026-03-06</td></tr>
+<tr><td>44</td><td><b>btree.h</b></td><td><span class='ext'>h</span></td><td>9.2 KB</td><td style='color:#888;font-size:11px'>/include/btree.h</td><td>2026-03-06</td></tr>
+<tr><td>45</td><td><b>btree.h</b></td><td><span class='ext'>h</span></td><td>30.3 KB</td><td style='color:#888;font-size:11px'>/include/btree.h</td><td>2026-03-06</td></tr>
+<tr><td>46</td><td><b>c83706c47323db2e14927a858887d3f2363a69</b></td><td><span class='ext'>-</span></td><td>102 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\2d\c83706c47323db2e14927a858887d3f2363a69</td><td>2026-03-05</td></tr>
+<tr><td>47</td><td><b>ca17452fdb3292706167c69774b2d664ef27f1</b></td><td><span class='ext'>-</span></td><td>1.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\a1\ca17452fdb3292706167c69774b2d664ef27f1</td><td>2026-03-06</td></tr>
+<tr><td>48</td><td><b>commit-msg.sample</b></td><td><span class='ext'>sample</span></td><td>896 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\commit-msg.sample</td><td>2026-03-02</td></tr>
+<tr><td>49</td><td><b>config</b></td><td><span class='ext'>-</span></td><td>322 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\config</td><td>2026-03-02</td></tr>
+<tr><td>50</td><td><b>config.ini</b></td><td><span class='ext'>ini</span></td><td>3.7 KB</td><td style='color:#888;font-size:11px'>/config/config.ini</td><td>2026-03-06</td></tr>
+<tr><td>51</td><td><b>config.ini</b></td><td><span class='ext'>ini</span></td><td>15.2 KB</td><td style='color:#888;font-size:11px'>/config/config.ini</td><td>2026-03-06</td></tr>
+<tr><td>52</td><td><b>config.ini</b></td><td><span class='ext'>ini</span></td><td>26.7 KB</td><td style='color:#888;font-size:11px'>/config/config.ini</td><td>2026-03-06</td></tr>
+<tr><td>53</td><td><b>d98c2a2f690a5a334cd84af0735de1238717c6</b></td><td><span class='ext'>-</span></td><td>1.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\b6\d98c2a2f690a5a334cd84af0735de1238717c6</td><td>2026-03-06</td></tr>
+<tr><td>54</td><td><b>data.json</b></td><td><span class='ext'>json</span></td><td>16.0 KB</td><td style='color:#888;font-size:11px'>/data/data.json</td><td>2026-03-06</td></tr>
+<tr><td>55</td><td><b>data.json</b></td><td><span class='ext'>json</span></td><td>21.0 KB</td><td style='color:#888;font-size:11px'>/data/data.json</td><td>2026-03-06</td></tr>
+<tr><td>56</td><td><b>data.json</b></td><td><span class='ext'>json</span></td><td>23.9 KB</td><td style='color:#888;font-size:11px'>/data/data.json</td><td>2026-03-06</td></tr>
+<tr><td>57</td><td><b>ddcc4c8ea706891cc697e8475dd9f2390ca037</b></td><td><span class='ext'>-</span></td><td>152 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\ee\ddcc4c8ea706891cc697e8475dd9f2390ca037</td><td>2026-03-05</td></tr>
+<tr><td>58</td><td><b>delete.c</b></td><td><span class='ext'>c</span></td><td>24.6 KB</td><td style='color:#888;font-size:11px'>/src/delete.c</td><td>2026-03-06</td></tr>
+<tr><td>59</td><td><b>delete.c</b></td><td><span class='ext'>c</span></td><td>8.8 KB</td><td style='color:#888;font-size:11px'>/src/delete.c</td><td>2026-03-06</td></tr>
+<tr><td>60</td><td><b>delete.c</b></td><td><span class='ext'>c</span></td><td>5.7 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\delete.c</td><td>2026-03-06</td></tr>
+<tr><td>61</td><td><b>delete.c</b></td><td><span class='ext'>c</span></td><td>29.8 KB</td><td style='color:#888;font-size:11px'>/src/delete.c</td><td>2026-03-06</td></tr>
+<tr><td>62</td><td><b>deploy.py</b></td><td><span class='ext'>py</span></td><td>3.9 KB</td><td style='color:#888;font-size:11px'>/scripts/deploy.py</td><td>2026-03-06</td></tr>
+<tr><td>63</td><td><b>deploy.py</b></td><td><span class='ext'>py</span></td><td>4.0 KB</td><td style='color:#888;font-size:11px'>/scripts/deploy.py</td><td>2026-03-06</td></tr>
+<tr><td>64</td><td><b>deploy.py</b></td><td><span class='ext'>py</span></td><td>24.3 KB</td><td style='color:#888;font-size:11px'>/scripts/deploy.py</td><td>2026-03-06</td></tr>
+<tr><td>65</td><td><b>description</b></td><td><span class='ext'>-</span></td><td>73 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\description</td><td>2026-03-02</td></tr>
+<tr><td>66</td><td><b>e64585615e5adc29662d5bfc4bce836f45260d</b></td><td><span class='ext'>-</span></td><td>151 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\aa\e64585615e5adc29662d5bfc4bce836f45260d</td><td>2026-03-06</td></tr>
+<tr><td>67</td><td><b>eabe6461231a2a731e3daf40f96d22e907e335</b></td><td><span class='ext'>-</span></td><td>164 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\d0\eabe6461231a2a731e3daf40f96d22e907e335</td><td>2026-03-06</td></tr>
+<tr><td>68</td><td><b>exclude</b></td><td><span class='ext'>-</span></td><td>240 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\info\exclude</td><td>2026-03-02</td></tr>
+<tr><td>69</td><td><b>f253814d6ca31988320c4ce1aea9ecb6c19398</b></td><td><span class='ext'>-</span></td><td>2.4 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\2a\f253814d6ca31988320c4ce1aea9ecb6c19398</td><td>2026-03-06</td></tr>
+<tr><td>70</td><td><b>fd828029fb3bb619173fdc20ca75d83e05b56a</b></td><td><span class='ext'>-</span></td><td>2.0 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\objects\2d\fd828029fb3bb619173fdc20ca75d83e05b56a</td><td>2026-03-06</td></tr>
+<tr><td>71</td><td><b>file_btree_simple.c</b></td><td><span class='ext'>c</span></td><td>29.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\file_btree_simple.c</td><td>2026-03-06</td></tr>
+<tr><td>72</td><td><b>fm.exe</b></td><td><span class='ext'>exe</span></td><td>118.5 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\fm.exe</td><td>2026-03-06</td></tr>
+<tr><td>73</td><td><b>fsmonitor-watchman.sample</b></td><td><span class='ext'>sample</span></td><td>4.6 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\fsmonitor-watchman.sample</td><td>2026-03-02</td></tr>
+<tr><td>74</td><td><b>homework.pdf</b></td><td><span class='ext'>pdf</span></td><td>200.0 KB</td><td style='color:#888;font-size:11px'>C:\Users\kimay\Documents\homework.pdf</td><td>2026-03-06</td></tr>
+<tr><td>75</td><td><b>index</b></td><td><span class='ext'>-</span></td><td>297 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\index</td><td>2026-03-06</td></tr>
+<tr><td>76</td><td><b>insert.c</b></td><td><span class='ext'>c</span></td><td>5.6 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\insert.c</td><td>2026-03-06</td></tr>
+<tr><td>77</td><td><b>main</b></td><td><span class='ext'>-</span></td><td>911 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\logs\refs\heads\main</td><td>2026-03-06</td></tr>
+<tr><td>78</td><td><b>main</b></td><td><span class='ext'>-</span></td><td>308 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\logs\refs\remotes\origin\main</td><td>2026-03-05</td></tr>
+<tr><td>79</td><td><b>main</b></td><td><span class='ext'>-</span></td><td>41 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\refs\heads\main</td><td>2026-03-06</td></tr>
+<tr><td>80</td><td><b>main</b></td><td><span class='ext'>-</span></td><td>41 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\refs\remotes\origin\main</td><td>2026-03-05</td></tr>
+<tr><td>81</td><td><b>main.c</b></td><td><span class='ext'>c</span></td><td>27.5 KB</td><td style='color:#888;font-size:11px'>/src/main.c</td><td>2026-03-06</td></tr>
+<tr><td>82</td><td><b>main.c</b></td><td><span class='ext'>c</span></td><td>26.7 KB</td><td style='color:#888;font-size:11px'>/src/main.c</td><td>2026-03-06</td></tr>
+<tr><td>83</td><td><b>main.c</b></td><td><span class='ext'>c</span></td><td>9.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\main.c</td><td>2026-03-06</td></tr>
+<tr><td>84</td><td><b>main.c</b></td><td><span class='ext'>c</span></td><td>27.6 KB</td><td style='color:#888;font-size:11px'>/src/main.c</td><td>2026-03-06</td></tr>
+<tr><td>85</td><td><b>main.h</b></td><td><span class='ext'>h</span></td><td>1.6 KB</td><td style='color:#888;font-size:11px'>/include/main.h</td><td>2026-03-06</td></tr>
+<tr><td>86</td><td><b>main.h</b></td><td><span class='ext'>h</span></td><td>6.4 KB</td><td style='color:#888;font-size:11px'>/include/main.h</td><td>2026-03-06</td></tr>
+<tr><td>87</td><td><b>main.h</b></td><td><span class='ext'>h</span></td><td>27.5 KB</td><td style='color:#888;font-size:11px'>/include/main.h</td><td>2026-03-06</td></tr>
+<tr><td>88</td><td><b>notes.txt</b></td><td><span class='ext'>txt</span></td><td>17.3 KB</td><td style='color:#888;font-size:11px'>/notes/notes.txt</td><td>2026-03-06</td></tr>
+<tr><td>89</td><td><b>notes.txt</b></td><td><span class='ext'>txt</span></td><td>5.5 KB</td><td style='color:#888;font-size:11px'>/notes/notes.txt</td><td>2026-03-06</td></tr>
+<tr><td>90</td><td><b>operations.c</b></td><td><span class='ext'>c</span></td><td>8.4 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\operations.c</td><td>2026-03-06</td></tr>
+<tr><td>91</td><td><b>photo.jpg</b></td><td><span class='ext'>jpg</span></td><td>12.0 KB</td><td style='color:#888;font-size:11px'>/media/photo.jpg</td><td>2026-03-06</td></tr>
+<tr><td>92</td><td><b>photo.jpg</b></td><td><span class='ext'>jpg</span></td><td>701 B</td><td style='color:#888;font-size:11px'>/media/photo.jpg</td><td>2026-03-06</td></tr>
+<tr><td>93</td><td><b>photo.jpg</b></td><td><span class='ext'>jpg</span></td><td>7.1 KB</td><td style='color:#888;font-size:11px'>/media/photo.jpg</td><td>2026-03-06</td></tr>
+<tr><td>94</td><td><b>post-update.sample</b></td><td><span class='ext'>sample</span></td><td>189 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\post-update.sample</td><td>2026-03-02</td></tr>
+<tr><td>95</td><td><b>pre-applypatch.sample</b></td><td><span class='ext'>sample</span></td><td>424 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\pre-applypatch.sample</td><td>2026-03-02</td></tr>
+<tr><td>96</td><td><b>pre-commit.sample</b></td><td><span class='ext'>sample</span></td><td>1.6 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\pre-commit.sample</td><td>2026-03-02</td></tr>
+<tr><td>97</td><td><b>pre-merge-commit.sample</b></td><td><span class='ext'>sample</span></td><td>416 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\pre-merge-commit.sample</td><td>2026-03-02</td></tr>
+<tr><td>98</td><td><b>pre-push.sample</b></td><td><span class='ext'>sample</span></td><td>1.3 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\pre-push.sample</td><td>2026-03-02</td></tr>
+<tr><td>99</td><td><b>pre-rebase.sample</b></td><td><span class='ext'>sample</span></td><td>4.8 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\pre-rebase.sample</td><td>2026-03-02</td></tr>
+<tr><td>100</td><td><b>pre-receive.sample</b></td><td><span class='ext'>sample</span></td><td>544 B</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\pre-receive.sample</td><td>2026-03-02</td></tr>
+<tr><td>101</td><td><b>prepare-commit-msg.sample</b></td><td><span class='ext'>sample</span></td><td>1.5 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\prepare-commit-msg.sample</td><td>2026-03-02</td></tr>
+<tr><td>102</td><td><b>push-to-checkout.sample</b></td><td><span class='ext'>sample</span></td><td>2.7 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\push-to-checkout.sample</td><td>2026-03-02</td></tr>
+<tr><td>103</td><td><b>report.pdf</b></td><td><span class='ext'>pdf</span></td><td>6.6 KB</td><td style='color:#888;font-size:11px'>/docs/report.pdf</td><td>2026-03-06</td></tr>
+<tr><td>104</td><td><b>report.pdf</b></td><td><span class='ext'>pdf</span></td><td>30.7 KB</td><td style='color:#888;font-size:11px'>/docs/report.pdf</td><td>2026-03-06</td></tr>
+<tr><td>105</td><td><b>report.pdf</b></td><td><span class='ext'>pdf</span></td><td>17.7 KB</td><td style='color:#888;font-size:11px'>/docs/report.pdf</td><td>2026-03-06</td></tr>
+<tr><td>106</td><td><b>sales.csv</b></td><td><span class='ext'>csv</span></td><td>17.6 KB</td><td style='color:#888;font-size:11px'>/data/sales.csv</td><td>2026-03-06</td></tr>
+<tr><td>107</td><td><b>sales.csv</b></td><td><span class='ext'>csv</span></td><td>25.1 KB</td><td style='color:#888;font-size:11px'>/data/sales.csv</td><td>2026-03-06</td></tr>
+<tr><td>108</td><td><b>sales.csv</b></td><td><span class='ext'>csv</span></td><td>11.5 KB</td><td style='color:#888;font-size:11px'>/data/sales.csv</td><td>2026-03-06</td></tr>
+<tr><td>109</td><td><b>search.c</b></td><td><span class='ext'>c</span></td><td>19.4 KB</td><td style='color:#888;font-size:11px'>/src/search.c</td><td>2026-03-06</td></tr>
+<tr><td>110</td><td><b>search.c</b></td><td><span class='ext'>c</span></td><td>12.3 KB</td><td style='color:#888;font-size:11px'>/src/search.c</td><td>2026-03-06</td></tr>
+<tr><td>111</td><td><b>search.c</b></td><td><span class='ext'>c</span></td><td>5.3 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\search.c</td><td>2026-03-06</td></tr>
+<tr><td>112</td><td><b>search.c</b></td><td><span class='ext'>c</span></td><td>19.0 KB</td><td style='color:#888;font-size:11px'>/src/search.c</td><td>2026-03-06</td></tr>
+<tr><td>113</td><td><b>sendemail-validate.sample</b></td><td><span class='ext'>sample</span></td><td>2.3 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\sendemail-validate.sample</td><td>2026-03-02</td></tr>
+<tr><td>114</td><td><b>server.log</b></td><td><span class='ext'>log</span></td><td>19.8 KB</td><td style='color:#888;font-size:11px'>/logs/server.log</td><td>2026-03-06</td></tr>
+<tr><td>115</td><td><b>server.log</b></td><td><span class='ext'>log</span></td><td>31.5 KB</td><td style='color:#888;font-size:11px'>/logs/server.log</td><td>2026-03-06</td></tr>
+<tr><td>116</td><td><b>server.log</b></td><td><span class='ext'>log</span></td><td>15.6 KB</td><td style='color:#888;font-size:11px'>/logs/server.log</td><td>2026-03-06</td></tr>
+<tr><td>117</td><td><b>structs.h</b></td><td><span class='ext'>h</span></td><td>3.9 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\structs.h</td><td>2026-03-06</td></tr>
+<tr><td>118</td><td><b>update.sample</b></td><td><span class='ext'>sample</span></td><td>3.6 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\.git\hooks\update.sample</td><td>2026-03-02</td></tr>
+<tr><td>119</td><td><b>users.csv</b></td><td><span class='ext'>csv</span></td><td>11.2 KB</td><td style='color:#888;font-size:11px'>/data/users.csv</td><td>2026-03-06</td></tr>
+<tr><td>120</td><td><b>users.csv</b></td><td><span class='ext'>csv</span></td><td>16.8 KB</td><td style='color:#888;font-size:11px'>/data/users.csv</td><td>2026-03-06</td></tr>
+<tr><td>121</td><td><b>users.csv</b></td><td><span class='ext'>csv</span></td><td>21.1 KB</td><td style='color:#888;font-size:11px'>/data/users.csv</td><td>2026-03-06</td></tr>
+<tr><td>122</td><td><b>utils.c</b></td><td><span class='ext'>c</span></td><td>26.0 KB</td><td style='color:#888;font-size:11px'>/src/utils.c</td><td>2026-03-06</td></tr>
+<tr><td>123</td><td><b>utils.c</b></td><td><span class='ext'>c</span></td><td>25.4 KB</td><td style='color:#888;font-size:11px'>/src/utils.c</td><td>2026-03-06</td></tr>
+<tr><td>124</td><td><b>utils.c</b></td><td><span class='ext'>c</span></td><td>22.7 KB</td><td style='color:#888;font-size:11px'>/src/utils.c</td><td>2026-03-06</td></tr>
+<tr><td>125</td><td><b>visual.c</b></td><td><span class='ext'>c</span></td><td>15.5 KB</td><td style='color:#888;font-size:11px'>K:\sy\sem4\ads\DATABASE_INDEX_USING_BTREE\visual.c</td><td>2026-03-06</td></tr>
+</table>
+</div>
+<footer>Generated by B+ Tree File Manager &mdash; 2026-03-06 12:07:11</footer>
+</body>
+</html>

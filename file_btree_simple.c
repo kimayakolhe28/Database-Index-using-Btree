@@ -18,8 +18,6 @@
   #include <sys/stat.h>
 #endif
 
-
-
 /* ============================================================
    CONFIGURATION
    ============================================================ */
@@ -57,11 +55,6 @@ typedef struct {
     int   count;   /* total files                             */
     long  total;   /* total size in bytes                     */
 } Tree;
-
-/* visualization functions - defined in visual.c */
-void print_tree_terminal(Tree *t);
-void export_dot(Tree *t, const char *filename);
-void export_html(Tree *t, const char *filename);
 
 /* ============================================================
    CREATE / FREE
@@ -824,11 +817,13 @@ int main(void) {
         printf(" 12  Show statistics\n");
         printf(" 13  Run benchmark\n");
         printf(" 14  Reload sample data\n\n");
-
         printf("  -- Visualization --\n");
         printf(" 15  Show tree in terminal\n");
         printf(" 16  Export DOT file (Graphviz PNG)\n");
         printf(" 17  Export HTML (open in browser)\n\n");
+        printf("  0  Exit\n");
+        printf("\n  Choice: ");
+
         printf("  0  Exit\n");
         printf("\n  Choice: ");
 
@@ -921,18 +916,6 @@ int main(void) {
         case 12: print_stats(t);  break;
         case 13: benchmark();     break;
         case 14: load_samples(t); break;
-
-        case 15:
-            print_tree_terminal(t);
-            break;
-
-        case 16:
-            export_dot(t, "btree.dot");
-            break;
-
-        case 17:
-            export_html(t, "btree.html");
-            break;
 
         case 0:
             printf("  Goodbye!\n\n");

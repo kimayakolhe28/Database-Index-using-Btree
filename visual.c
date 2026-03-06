@@ -18,45 +18,7 @@
  * ============================================================
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <time.h>
-
-/* ── Same constants and structs as file_btree_simple.c ──────── */
-/* Guard prevents redefinition when compiled together            */
-#ifndef BTREE_STRUCTS_DEFINED
-#define BTREE_STRUCTS_DEFINED
-
-#define T        3
-#define MAX_KEYS (2*T - 1)
-#define MAX_CH   (2*T)
-
-typedef struct {
-    char   name[256];
-    char   path[512];
-    char   ext[16];
-    long   size;
-    time_t modified;
-} File;
-
-typedef struct Node {
-    char         keys[MAX_KEYS][256];
-    struct Node *child[MAX_CH];
-    File        *data[MAX_KEYS];
-    struct Node *next;
-    int          n;
-    bool         leaf;
-} Node;
-
-typedef struct {
-    Node *root;
-    int   count;
-    long  total;
-} Tree;
-
-#endif /* BTREE_STRUCTS_DEFINED */
+#include "structs.h"
 
 /* ============================================================
    OPTION 15 : TERMINAL TEXT VISUALIZATION
